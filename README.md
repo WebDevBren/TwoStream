@@ -30,12 +30,46 @@ For more information on how to install TwoStream, please visit the [Documentatio
 	},
 ```
 
-## Completed:
- - ServiceProvider and Facades, add `'CupOfTea\TwoStream\TwoStreamServiceProvider',` to your providers, and `'TwoStream' => 'CupOfTea\TwoStream\Facades\TwoStream',` and `'WsRoute'   => 'CupOfTea\TwoStream\Facades\WsRoute',` to your aliases in `config/app.php`
- - Installation command; run `twostream:install` before trying to use anything. (seriously!)
- - WebSocket Server, boot with `twostream:listen`.
- - Routing, use `WsRoute::call`, `WsRoute::publish`, `WsRoute::subscribe`, `WsRoute::unsubscribe` or `WsRoute::controller` to define WebSocket routes in `app/Ws/routes.php`. For implicit controllers, use the verbs `call`, `publish`, `subscribe` or `unsubscribe` and define your functions according to the [Laravel Docs](http://laravel.com/docs/5.0/controllers#implicit-controllers).
- - Read-only Session data available in Ws Controllers via the WsSession Facade, add `'WsSession' => 'CupOfTea\TwoStream\Facades\WsSession',` to your aliases in `config/app.php`
+## Completed
+
+Add the Following to your `config/app.php` : 
+
+#####laravel 5 - 
+
+	ServiceProvider - 'CupOfTea\TwoStream\TwoStreamServiceProvider',
+	TwoStream Facade - 'TwoStream' => 'CupOfTea\TwoStream\Facades\TwoStream'
+	WsSession Facade - 'WsSession' => 'CupOfTea\TwoStream\Facades\WsSession'
+	
+#####laravel 5.1 -
+
+	ServiceProvider - CupOfTea\TwoStream\TwoStreamServiceProvider::class,
+	TwoStream Facade - 'TwoStream' => CupOfTea\TwoStream\Facades\TwoStream::class
+	WsSession Facade - 'WsSession' => 'CupOfTea\TwoStream\Facades\WsSession::class
+	
+##### Config and finalising Installation :
+
+To Finalise the Installation run the Following : 
+
+    php artisan twostream::install 
+
+To Start the Websocket Server run : 
+
+    php artisan twostream:listen 
+    
+In your new and Shiny `app/Ws/routes.php` 
+
+   - Available Route Types : 
+   	`WsRoute::call`,
+	`WsRoute::publish`,
+	`WsRoute::subscribe`,
+	`WsRoute::unsubscribe`,
+	`WsRoute::controller`.
+
+For implicit controllers, use the verbs `call`, `publish`, `subscribe` or `unsubscribe` and define your functions according to the [Laravel Docs](http://laravel.com/docs/5.0/controllers#implicit-controllers).
+
+#### WsSession Facade 
+
+ - Read-only Session data available in Ws Controllers via the WsSession Facade, add  to your aliases in `config/app.php`
  - Send response to all subscribers, all excluding requestee or requestee.
  - Push events from server to all or specific user (using sessionId)
  
